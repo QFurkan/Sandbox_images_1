@@ -4,8 +4,10 @@
 //Global Variables
 int appWidth, appHeight;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
-PImage picBackground;
-Boolean nightmode=false; //Note: clock and turn on automatically
+float bikeX, bikeY, bikeWidth, bikeHeight;
+float darthX, darthY, darthWidth, darthHeight;
+PImage picBackground, bikeForeground, darthVaderPortrait;
+Boolean nightmode=false; //Note: clock will automatically turn on
 Boolean brightnessControl=false; //Note: ARROWS
 int brightnessNumber=128; //Range:1-255
 //
@@ -17,14 +19,55 @@ void setup() {
   appHeight = height;
   //
   //Population
+  int hourNightMode = hour(); //24-hour clock
+  println(hourNightMode);
+  if ( hourNightMode>17 ) {
+    nightmode=true;
+  } else if ( hourNightMode<05 ) {
+    nightmode=true;
+  } else {
+    nightmode=false;
+  }
   backgroundImageX = appWidth*0;
   backgroundImageY = appHeight*0;
   backgroundImageWidth = appWidth-1;
   backgroundImageHeight = appHeight-1;
-  picBackground = loadImage("../imageUsed/Landscape & Square Images/6f2d34fe6c8746c56c14fbc55308ef99.jpg");
+  bikeX = appWidth*1/14;
+  bikeY = appHeight*1/8;
+  bikeWidth = appWidth*2.25/7;
+  bikeHeight = appHeight*1/4; // 2/8
+  darthX = bikeX;
+  darthY = appHeight*5/8;
+  darthWidth = bikeWidth;
+  darthHeight = bikeHeight;
+  //Aspect Ratio Calculations
+  //Determine Aspect Ratio
+  //Compare dimension to get larger dimension
+  //Calculate Smaller Dimension
+  //Rewrite Variables based on rect() vars
+  obiImageWidth = ;
+  obiImageHeight = ;
+  bikeImageWidth = ;
+  bikeImageHeight =  ;
+  darthImageWidth = ;
+  darthImageHeight = ;
+  //Concatenation of Pathways
+  String up = "..";
+  String open = "/";
+  String imagesPath = up + open;
+  String landScapeImage = " imageUsed/Landscape & Square Images/";
+  String portraitImage = "imagesUsed/Portrait/";
+  String obiImage = "6f2d34fe6c8746c56c14fbc55308ef99.jpg";
+  String bikeImage = "brooklyn-bicycle-co-brooklyn-bicycle-company-bedfo.jpg";
+  String darthImage  = "1000_F_555102066_gA6ZEMHmwzYRmY0Lw7LWLux9M7d7McHO.jpg";
+  picBackground = loadImage( imagesPath + landScapeImage + obiImage ); //Concatenation
+  bikeForeground = loadImage( imagesPath + landScapeImage + bikeImage);
+  darthVaderPortrait = loadImage( imagesPath + portraitImage + darthImage);
   //
   //DIVs
   //rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+  //rect( bikeX, bikeY, bikeWidth, bikeHeight ); //bike image
+  //rect( darthX, darthY, darthWidth, darthHeight ); //Darth Image
   //
 } //End setup
 //
@@ -32,7 +75,7 @@ void draw() {
   //background(255); //built in BUG, 1 pixel
   rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
   //
-  println(brightnessControl, nightmode);
+  //println(brightnessControl, nightmode);
   if ( brightnessControl==true )
   { //Gray Scale: 1/2 tint (i.e 128/256=1/2)
     if ( brightnessNumber<1 ) {
@@ -43,17 +86,19 @@ void draw() {
       //Empty ELSE
     }
     tint (255, brightnessNumber);
-    println(brightnessNumber);
+    //println(brightnessNumber);
   }
   //if ( nightmode==true ) tint ( 64, 64, 40 ); //Gray Scale: 1/2 tint (i.e 128/256=1/2)
   if ( nightmode==true ) {
-    tint ( 64, 64, 40 );
+    tint ( 64, 64, 40 ); //Blue Light must be limited, i.e. <40
     //println(nightmode);
   } else {
     noTint(); //See Processing DOC
     //println(nightmode);
   }
   image( picBackground, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+  image( bikeForeground, bikeX, bikeY, bikeWidth, bikeHeight ); //bike image, purpose: see circles in aspect ratio
+  image( darthVaderPortrait, darthX, darthY, darthWidth, darthHeight ); //Darth Vader in Portrait, geometry is landscape, thus centered
 } //End draw
 //
 void keyPressed() {
@@ -68,6 +113,7 @@ void keyPressed() {
   //NOTE: Nightmode does turn off
   if ( key==CODED && keyCode==UP || keyCode==DOWN ) { //Brightness keybind
     brightnessControl = true;
+    //Builtin BUG, use Boolean to draw() formulae instead
     if ( key==CODED && keyCode==UP ) brightnessNumber++ ; //brightnessNumber+=1 //brightnessNumber = brightnessNumber+1
     if ( key==CODED && keyCode==DOWN ) brightnessNumber-- ; //brightnessNumber-=1
     //CONTINUE HERE with brightness toggles
