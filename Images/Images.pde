@@ -45,12 +45,12 @@ void setup() {
   //Compare dimension to get larger dimension
   //Calculate Smaller Dimension
   //Rewrite Variables based on rect() vars
-  obiImageWidth = ;
-  obiImageHeight = ;
-  bikeImageWidth = ;
-  bikeImageHeight =  ;
-  darthImageWidth = ;
-  darthImageHeight = ;
+  //obiImageWidth = ;
+  //obiImageHeight = ;
+  //bikeImageWidth = ;
+  //bikeImageHeight =  ;
+  //darthImageWidth = ;
+  //darthImageHeight = ;
   //Concatenation of Pathways
   String up = "..";
   String open = "/";
@@ -60,7 +60,7 @@ void setup() {
   String obiImage = "6f2d34fe6c8746c56c14fbc55308ef99.jpg";
   String bikeImage = "brooklyn-bicycle-co-brooklyn-bicycle-company-bedfo.jpg";
   String darthImage  = "1000_F_555102066_gA6ZEMHmwzYRmY0Lw7LWLux9M7d7McHO.jpg";
-  picBackground = loadImage( imagesPath + landScapeImage + obiImage ); //Concatenation
+  picBackground = loadImage( "Sandbox_images_1\imageUsed\Landscape & Square Images\cloud.jpg" ); //Concatenation
   bikeForeground = loadImage( imagesPath + landScapeImage + bikeImage);
   darthVaderPortrait = loadImage( imagesPath + portraitImage + darthImage);
   //
@@ -125,4 +125,4 @@ void keyPressed() {
 void mousePressed() {
 } //End mousePressed
 //
-// End MAIN Program
+// End MAIN Program 
